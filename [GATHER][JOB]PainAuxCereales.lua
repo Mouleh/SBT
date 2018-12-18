@@ -124,13 +124,15 @@ function achateau()
 	if (character:kamas() > 4999) then
 		npc:npcBuy()
 		global:delay(5000)
-		global:printSuccess("J'achete l'eau")
-		sale:buyItem(311, 100, 2000)
-		sale:buyItem(311, 100, 2000)
+		while (inventory:itemCount(311) < 200) do
+			global:printSuccess("J'achete l'eau")
+			sale:buyItem(311, 100, 2000)
+		end
 		global:delay(1000)
-		global:printSuccess("J'achete la levure")
-		sale:buyItem(286, 100, 2000)
-		sale:buyItem(286, 100, 2000)
+		while (inventory:itemCount(286) < 200) do
+			global:printSuccess("J'achete la levure")
+			sale:buyItem(286, 100, 2000)
+		end
 		global:printSuccess("achat fini, je bouge à l'atelier...")
 		global:leaveDialog()
 		map:door(200)
@@ -141,37 +143,71 @@ function achateau()
 end
 
 
-function craftpain()	
-	global:printSuccess("Debut de la fonction craftpain")
-	map:door(303)
-	global:delay(2000)
-	global:printSuccess("J'entre dans le crafteur")
-	craft:PutItem(285,1)
-	global:printSuccess("Je mets les farines de blé")
-	global:delay(2000)
-	craft:PutItem(529,1)
-	global:printSuccess("Je mets les farines d'orge")
-	global:delay(2000)
-	craft:PutItem(530,1)
-	global:printSuccess("Je mets les farines de seigle")
-	global:delay(2000)
-	craft:PutItem(531,1)
-	global:printSuccess("Je mets les farines d'avoine")
-	global:delay(2000)
-	craft:PutItem(311,1)
-	global:printSuccess("Je mets l'eau")
-	global:delay(2000)
-	craft:PutItem(286,1)
-	global:printSuccess("Je mets la levure")
-	global:delay(2000)
-	craft:ChangeQuantityToCraft(200)
-	global:printSuccess("Je choisis la quantité")
-	global:delay(2000)
-	global:printSuccess("On commence à craft les pains")
-	craft:Ready()
-	global:delay(200 * 1000)
-	global:printSuccess("Craft des pains finis")
-	global:leaveDialog()
+function craftpain()
+	if (inventory:itemCount(526) < 200) then
+		global:printSuccess("Debut de la fonction craftpain")
+		map:door(303)
+		global:delay(2000)
+		global:printSuccess("J'entre dans le crafteur")
+		craft:PutItem(285,1)
+		global:printSuccess("Je mets les farines de blé")
+		global:delay(2000)
+		craft:PutItem(529,1)
+		global:printSuccess("Je mets les farines d'orge")
+		global:delay(2000)
+		craft:PutItem(530,1)
+		global:printSuccess("Je mets les farines de seigle")
+		global:delay(2000)
+		craft:PutItem(531,1)
+		global:printSuccess("Je mets les farines d'avoine")
+		global:delay(2000)
+		craft:PutItem(311,1)
+		global:printSuccess("Je mets l'eau")
+		global:delay(2000)
+		craft:PutItem(286,1)
+		global:printSuccess("Je mets la levure")
+		global:delay(2000)
+		craft:ChangeQuantityToCraft((201 - inventory:itemCount(526)) + 1)
+		global:printSuccess("Je choisis la quantité")
+		global:delay(2000)
+		global:printSuccess("On commence à craft les pains")
+		craft:Ready()
+		global:delay((201 - inventory:itemCount(526)) * 1000)
+		global:printSuccess("Craft des pains finis")
+		global:leaveDialog()
+	end
+	if (inventory:itemCount(526) < 200) then
+		global:printSuccess("Debut de la fonction craftpain")
+		map:door(303)
+		global:delay(2000)
+		global:printSuccess("J'entre dans le crafteur")
+		craft:PutItem(285,1)
+		global:printSuccess("Je mets les farines de blé")
+		global:delay(2000)
+		craft:PutItem(529,1)
+		global:printSuccess("Je mets les farines d'orge")
+		global:delay(2000)
+		craft:PutItem(530,1)
+		global:printSuccess("Je mets les farines de seigle")
+		global:delay(2000)
+		craft:PutItem(531,1)
+		global:printSuccess("Je mets les farines d'avoine")
+		global:delay(2000)
+		craft:PutItem(311,1)
+		global:printSuccess("Je mets l'eau")
+		global:delay(2000)
+		craft:PutItem(286,1)
+		global:printSuccess("Je mets la levure")
+		global:delay(2000)
+		craft:ChangeQuantityToCraft((201 - inventory:itemCount(526)) + 1)
+		global:printSuccess("Je choisis la quantité")
+		global:delay(2000)
+		global:printSuccess("On commence à craft les pains")
+		craft:Ready()
+		global:delay((201 - inventory:itemCount(526)) * 1000)
+		global:printSuccess("Craft des pains finis")
+		global:leaveDialog()
+	end
 	map:moveToCell(410)
 end
 
@@ -180,52 +216,52 @@ function crafting()
 	map:door(342)
 	global:delay(2000)
 	global:printSuccess("J'entre dans le crafteur")
-	if (inventory:itemCount(289) > 1) then
+	if (inventory:itemCount(285) < 200) then
 		craft:PutItem(289,2)
 		global:printSuccess("Je mets le blé")
 		global:delay(2000)
-		craft:ChangeQuantityToCraft(200)
+		craft:ChangeQuantityToCraft(200 - inventory:itemCount(285))
 		global:printSuccess("Je choisis la quantité")
 		global:delay(2000)
 		global:printSuccess("On commence à craft les farines de blé")
 		craft:Ready()
-		global:delay(200 * 600)
+		global:delay((200 - inventory:itemCount(285)) * 600)
 		global:printSuccess("Craft des farines de blé fini")
 	end
-	if (inventory:itemCount(400) > 1) then
+	if (inventory:itemCount(529) < 200) then
 		craft:PutItem(400,2)
 		global:printSuccess("Je mets l'orge")
 		global:delay(2000)
-		craft:ChangeQuantityToCraft(200)
+		craft:ChangeQuantityToCraft(200 - inventory:itemCount(529))
 		global:printSuccess("Je choisis la quantité")
 		global:delay(2000)
 		global:printSuccess("On commence à craft les farines d'orge")
 		craft:Ready()
-		global:delay(200 * 600)
+		global:delay((200 - inventory:itemCount(529)) * 600)
 		global:printSuccess("Craft des farines d'orge fini")
 	end
-	if (inventory:itemCount(532) > 1) then
+	if (inventory:itemCount(530) < 200) then
 		craft:PutItem(532,2)
 		global:printSuccess("Je mets le seigle")
 		global:delay(2000)
-		craft:ChangeQuantityToCraft(200)
+		craft:ChangeQuantityToCraft(200 - inventory:itemCount(530))
 		global:printSuccess("Je choisis la quantité")
 		global:delay(2000)
 		global:printSuccess("On commence à craft les farines de seigle")
 		craft:Ready()
-		global:delay(200 * 600)
+		global:delay((200 - inventory:itemCount(530)) * 600)
 		global:printSuccess("Craft des farines de seigle fini")
 	end
-	if (inventory:itemCount(533) > 1) then
+	if (inventory:itemCount(531) < 200) then
 		craft:PutItem(533,2)
 		global:printSuccess("Je mets l'avoine")
 		global:delay(2000)
-		craft:ChangeQuantityToCraft(200)
+		craft:ChangeQuantityToCraft(200 - inventory:itemCount(531))
 		global:printSuccess("Je choisis la quantité")
 		global:delay(2000)
 		global:printSuccess("On commence à craft les farines d'avoine")
 		craft:Ready()
-		global:delay(200 * 600)
+		global:delay((200 - inventory:itemCount(531)) * 600)
 		global:printSuccess("Craft des farines d'avoine fini")
 	end
 	global:leaveDialog()
@@ -239,8 +275,7 @@ function crafting()
 end
 
 function move()
-	if (inventory:itemCount(285) == 0) and (inventory:itemCount(529) == 0) and (inventory:itemCount(530) == 0) and (inventory:itemCount(531) == 0) and ( (inventory:itemCount(289) < 400) or (inventory:itemCount(400) < 400) or (inventory:itemCount(532) < 400) or (inventory:itemCount(533) < 400) ) and (inventory:itemCount(526) < 1) then
-		global:printSuccess("On recolte")
+	if (inventory:itemCount(285) == 0) and (inventory:itemCount(529) == 0) and (inventory:itemCount(530) == 0) and (inventory:itemCount(531) == 0) and ( (inventory:itemCount(289) < 400) or (inventory:itemCount(400) < 400) or (inventory:itemCount(532) < 400) or (inventory:itemCount(533) < 400) ) and (inventory:itemCount(526) == 0) then
 		changegather()
 		-- equilibrage()
 	return {
@@ -341,7 +376,7 @@ function move()
 		}
 	end
 
-		if (inventory:itemCount(285) > 0) and (inventory:itemCount(529) > 0) and (inventory:itemCount(530) > 0) and (inventory:itemCount(531) > 0) and (inventory:itemCount(311) < 1) and (inventory:itemCount(526) < 1) then
+		if (inventory:itemCount(285) == 200) and (inventory:itemCount(529) == 200) and (inventory:itemCount(530) == 200) and (inventory:itemCount(531) == 200) and ( (inventory:itemCount(311) < 200) or (inventory:itemCount(286) < 200) ) and (inventory:itemCount(526) == 0) then
 			global:printSuccess("On va acheter l'eau et la levure")
 			return {
 		        { map = "146226", custom = achateau },
@@ -361,16 +396,14 @@ function move()
 			}
 	  	end
 
-	  	if (inventory:itemCount(311) > 0) and (inventory:itemCount(526) < 1) then
+	  	if (map:onMap("6291461")) and (inventory:itemCount(526) < 200) then
 	  		global:printSuccess("On va craft le pain")
 	  		return {
-				{ map = "145714", path = "left" },
-				{ map = "146226", door = "200" },
 				{ map = "6291461", custom = craftpain },
 			}
 	  	end
 
-	  	if (inventory:itemCount(526) > 0) then
+	  	if (inventory:itemCount(526) == 200) then
 	  		global:printSuccess("On met en vente le pain")
 	  		return {
 				{ map = "-29,-50", custom = bougerenhaut },
@@ -384,7 +417,7 @@ function move()
 			}
 	  	end
 
-	  	if (inventory:itemCount(289) > 399) and (inventory:itemCount(400) > 399) and (inventory:itemCount(532) > 399) and (inventory:itemCount(533) > 399) and (inventory:itemCount(285) < 1) and (inventory:itemCount(529) < 1) and (inventory:itemCount(530) < 1) and (inventory:itemCount(531) < 1) and (inventory:itemCount(526) < 1) then
+	  	if (map:onMap("39845888") == false) and (inventory:itemCount(289) > 399) and (inventory:itemCount(400) > 399) and (inventory:itemCount(532) > 399) and (inventory:itemCount(533) > 399) and (inventory:itemCount(285) == 0) and (inventory:itemCount(529) == 0) and (inventory:itemCount(530) == 0) and (inventory:itemCount(531) == 0) and (inventory:itemCount(526) == 0) then
 	  		global:printSuccess("On va craft les farines")
 	  		return {
 	  			{ map = "-31,-42", path = "bottom" },
@@ -466,7 +499,18 @@ function move()
 		        { map = "-28,-46", path = "bottom" },
 		        { map = "-28,-45", path = "bottom" },
 		        { map = "144681", door = "400"},
-		        { map = "39845888", custom = crafting}
+	  	}
+	  end
+
+	  if (map:onMap("39845888")) and ( (inventory:itemCount(285) < 200) or (inventory:itemCount(529) < 200) or (inventory:itemCount(530) < 200) or (inventory:itemCount(531) < 200) ) then
+	  	return {
+	  		{ map = "39845888", custom = crafting },
+	  	}
+	  end
+
+	  if (map:onMap("39845888")) and (inventory:itemCount(285) == 200) and (inventory:itemCount(529) == 200) and (inventory:itemCount(530) == 200) and (inventory:itemCount(531) == 200) then
+	  	return {
+	  		{ map = "39845888", path = "465" },
 	  	}
 	  end
 end
