@@ -1,3 +1,4 @@
+
 fini = 0
 
 function compteur()
